@@ -24,8 +24,9 @@ The command is the following:
 ```
 python3 automate_ynab_csv.py /path/to/yourfile.csv /path/to/download_dir --start_row 10 --date_col_name "Date" --payee_col_name "Payee" --memo_col_name "Memo" --outflow_col_name "Outflow" --inflow_col_name "Inflow"
 ```
-Make sure to know which columns of your .csv file will be used for the configuration of YNAB. You can also use the website to first see which strings you have to set.
-If you get errors make sure first that your environment is active (see step 5 above). Second thing you should check is to make sure all the strings you specified are actually columns in your input .csv file (check the website to see quicker how the columns are named).
+Make sure to know which columns of your .csv file will be used for the configuration of YNAB. You can also use the website to first see which strings you have to set. The names provided there have to match exactly (also spaces and any digits if present).
+
+If you get errors make sure first that your environment is active (see step 5 above).
 
 ## Multiple setups for different formats
 What if you have different accounts that have different formats?
