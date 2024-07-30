@@ -24,20 +24,20 @@ The command is the following:
 ```
 python3 automate_ynab_csv.py /path/to/yourfile.csv /path/to/download_dir --start_row 10 --date_col_name "Date" --payee_col_name "Payee" --memo_col_name "Memo" --outflow_col_name "Outflow" --inflow_col_name "Inflow"
 ```
-
 Make sure to know which columns of your .csv file will be used for the configuration of YNAB. You can also use the website to first see which strings you have to set.
+If you get errors make sure first that your environment is active (see step 5 above). Second thing you should check is to make sure all the strings you specified are actually columns in your input .csv file (check the website to see quicker how the columns are named).
 
 ## Multiple setups for different formats
 What if you have different accounts that have different formats?
 For this we can create separate files that run our scripts with the correct parameters.
 
 ### Mac and Linux
-You can take a look at the `example_max_linus.sh` to see the setup.
+You can take a look at the `example_mac_linux.sh` to see the setup.
 1. Change the first line to reflect the path of where you created the environment.
 2. Change all the parameters in the second line for your needs.
 3. With an open terminal, navigate to the directory of your project.
-4. Run `chmod +x example_max_linus.sh` (or the name of your custom .sh file) to make sure the file has permissions to be run.
-5. Run the Bash script `./example_max_linus.sh`
+4. Run `chmod +x example_mac_linux.sh` (or the name of your custom .sh file) to make sure the file has permissions to be run.
+5. Run the Bash script `./example_mac_linux.sh`
 
 ### Windows
 You can take a look at the `example_windows.bat` to see the setup. Open it with the note app to modify it.
