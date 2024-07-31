@@ -1,4 +1,7 @@
 import argparse
+import time
+import os
+from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -122,20 +125,41 @@ def downloadFile():
         EC.presence_of_element_located((By.XPATH, '//div[@class="btn btn-success" and @ng-click="downloadFile()"]'))
     )
     download_button.click()
-    print("File downloaded successfully")
+
+def wait_for_download(download_dir, filename, timeout=30):
+    seconds = 0
+    while seconds < timeout:
+        files = os.listdir(download_dir)
+        if filename in files:
+            print("File downloaded successfully: ", filename)
+            return True
+        time.sleep(1)
+        seconds += 1
+    raise Exception("File download timed out")
+
+def renameExistingFileIfExists(expected_filename, renamed_filename):
+    if os.path.exists(os.path.join(download_dir, expected_filename)):
+        os.rename(os.path.join(download_dir, expected_filename), os.path.join(download_dir, renamed_filename))
 
 
 try:
     # Open the website
     driver.get("https://aniav.github.io/ynab-csv/")
+    
+    date_str = datetime.now().strftime("%Y%m%d")
+    expected_filename = f"ynab_data_{date_str}.csv"
+    renamed_filename = f"ynab_data_{date_str}_old.csv"
 
     setupFirstPage()
     setupSecondPage()
+    renameExistingFileIfExists(expected_filename, renamed_filename)
     downloadFile()
 
+    # Wait for the file to be downloaded
+    wait_for_download(download_dir, expected_filename)
+
     # When testing uncomment this to see browser state at end
-    # import time
-    # time.sleep(50)
+    # time.sleep(5)
 
 finally:
     # Close the browser
